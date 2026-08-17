@@ -1,45 +1,43 @@
-# resignation-letter
+# 退職届
 
-[Agent Plugins 1.0.0](https://github.com/agentplugins/agent-plugins-spec/blob/main/spec/1.0.0.md) 形式のプラグインです。日本の退職届を、横書きA4のPDFとして生成します。Win / macOS / Linux で動作します。
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-3776AB.svg)](https://www.python.org/downloads/)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey.svg)](#)
+[![PDF](https://img.shields.io/badge/output-PDF-red.svg)](#)
 
-会社名・宛先・氏名などの個人情報はパッケージに含みません。実行のたびに指定します。
+横書きA4の退職届PDFを作ります。
 
-## 必要環境
+宛先は左上、標題は中央、日付・所属・氏名は右下です。日付には曜日が入ります。印欄はありません。
 
-- Python 3.9+
-- `reportlab`（`requirements.txt` を参照）
-- 同梱の Noto Serif JP Regular（`assets/fonts/`）
+## 準備
 
-## レイアウト
+Python 3.9 以降が必要です。
 
-- A4・1枚・横書き
-- 宛先は左上、標題「退　職　届」は中央、日付・所属・氏名は右下
-- 日付は `2026年10月15日（木）` 形式（曜日つき）
-- 印欄なし
-- 宛先氏名は通称ではなく、登記上の漢字を使う
+```bash
+python3 -m pip install -r requirements.txt
+```
 
-## インストール
-
-このディレクトリをクライアントが読み込むプラグイン配置へコピーまたはシンボリックリンクします。
-
-Cursor の場合:
+Cursor に入れる場合:
 
 ```bash
 mkdir -p ~/.cursor/plugins/local
 ln -sfn /path/to/resignation-letter ~/.cursor/plugins/local/resignation-letter
 ```
 
-依存関係:
+## 使い方
 
 ```bash
-python3 -m pip install -r requirements.txt
+python3 skills/resignation-letter/scripts/generate.py \
+  --company "株式会社見本" \
+  --addressee "山田花子" \
+  --department "営業部" \
+  --name "佐藤　太郎" \
+  --resign-date 2026-10-15
 ```
 
-Agent Plugins 対応クライアントは、ルートの `plugin.json` を見て `skills/resignation-letter/` を発見します。
+PDF はデスクトップに保存されます。デスクトップが無いときはホームに保存します。
 
-## 必須項目
-
-エージェントは次をユーザーから取り、足りなければ聞きます。推測して埋めません。
+必須:
 
 | 項目 | 引数 |
 | --- | --- |
@@ -56,39 +54,10 @@ Agent Plugins 対応クライアントは、ルートの `plugin.json` を見て
 | 宛先役職 | `--addressee-title` | 代表取締役 |
 | 事由 | `--reason` | 一身上の都合 |
 | 提出日 | `--submit-date` | 実行日（Asia/Tokyo） |
-| 保存先 | `--output` | `~/Desktop/退職届_氏名.pdf`（Desktop が無ければホーム） |
+| 保存先 | `--output` | `~/Desktop/退職届_氏名.pdf` |
 
-## 生成
+宛先は通称ではなく、登記上の漢字を書いてください。
 
-スキルディレクトリをカレントにして実行します。
+## ライセンス
 
-```bash
-python3 skills/resignation-letter/scripts/generate.py \
-  --company "株式会社見本" \
-  --addressee "山田花子" \
-  --department "営業部" \
-  --name "佐藤　太郎" \
-  --resign-date 2026-10-15
-```
-
-## 構成
-
-```text
-resignation-letter/
-├── plugin.json
-├── requirements.txt
-├── skills/
-│   └── resignation-letter/
-│       ├── SKILL.md
-│       ├── scripts/
-│       │   └── generate.py
-│       └── assets/
-│           └── fonts/
-│               ├── NotoSerifJP-Regular.ttf
-│               └── OFL.txt
-├── LICENSE
-├── CHANGELOG.md
-└── README.md
-```
-
-Noto Serif JP は SIL Open Font License 1.1 です。ライセンス全文は `skills/resignation-letter/assets/fonts/OFL.txt` にあります。
+本体は MIT です。同梱の Noto Serif JP は [SIL Open Font License 1.1](skills/resignation-letter/assets/fonts/OFL.txt) です。
