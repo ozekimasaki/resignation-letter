@@ -1,0 +1,15 @@
+{
+  "name": "resignation-letter",
+  "displayName": "Resignation Letter",
+  "version": "1.0.0",
+  "description": "Generate a formal Japanese resignation notice (退職届) as a horizontal A4 PDF.",
+  "license": "MIT",
+  "keywords": [
+    "resignation",
+    "pdf",
+    "japan",
+    "hr",
+    "退職届"
+  ],
+  "skills": "./skills/"
+}

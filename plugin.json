@@ -1,0 +1,14 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "resignation-letter",
+  "version": "1.0.0",
+  "description": "Generate a formal Japanese resignation notice (退職届) as a horizontal A4 PDF.",
+  "license": "MIT",
+  "keywords": [
+    "resignation",
+    "pdf",
+    "japan",
+    "hr",
+    "退職届"
+  ]
+}
